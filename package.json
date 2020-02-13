@@ -1,0 +1,24 @@
+{
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "@types/jest": "^25.1.2",
+    "@types/node": "^12.12.20",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.0",
+    "typescript": "^3.7.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testMatch": [
+      "**/test/*.ts"
+    ]
+  }
+}
