@@ -1,6 +1,15 @@
 {
+  "name": "vivox-token",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc",
+    "prepublishOnly": "yarn run build"
   },
   "dependencies": {
     "@types/jest": "^25.1.2",

@@ -1,7 +1,9 @@
+import ChannelType from "./entity/ChannelType";
+
 namespace Identifiers {
-    export const Prefix = "confctl-g-";
-    export const channelName = (issuer: string, channelID: string) => {
-        return Prefix + issuer + "." + channelID
+    export const Prefix = "confctl";
+    export const channelName = (type: ChannelType, issuer: string, channelID: string) => {
+        return Prefix + type + issuer + "." + channelID
     }
 
     export const serverName = (issuer: string) => {
@@ -10,10 +12,6 @@ namespace Identifiers {
 
     export const userName = (issuer: string, userID: string) => {
         return "." + issuer + "." + userID + ".";
-    }
-
-    export const adminUserName = (userID: string) => {
-        return userID
     }
 }
 

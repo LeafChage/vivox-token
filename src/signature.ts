@@ -1,6 +1,6 @@
-import Header from "./header";
-import Payload from "./payload";
-import Util from "./util";
+import Header from "./entity/Header";
+import Payload from "./entity/Payload";
+import Util from "./Util";
 
 namespace Signature {
     export const sign = (header: Header, payload: Payload, key: string) => {

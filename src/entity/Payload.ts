@@ -1,4 +1,4 @@
-class Payload {
+interface Payload {
   // Issuer in https://developer.vivox.com/
   iss: string;
 

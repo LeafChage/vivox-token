@@ -1,18 +1,18 @@
 enum Action {
     // channel join
-    Join = "join",
+    Join = 'join',
 
     // channel join listen-only	
-    JoinMuted = "join_muted",
+    JoinMuted = 'join_muted',
 
     // kick user from a channel	
-    Kick = "kick",
+    Kick = 'kick',
 
     // sign in
-    Login = "login",
+    Login = 'login',
 
     // mute or unmute one, all, or all but one users for all users in channel.
-    Mute = "mute",
+    Mute = 'mute',
 }
 
 export default Action;
