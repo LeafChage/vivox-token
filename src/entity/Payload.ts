@@ -1,4 +1,4 @@
-interface Payload {
+type Payload = {
   // Issuer in https://developer.vivox.com/
   iss: string;
 
@@ -19,7 +19,6 @@ interface Payload {
 
   // to; the SIP URI of the channel
   t?: string;
-}
-
+};
 
 export default Payload;

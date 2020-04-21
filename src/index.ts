@@ -1,10 +1,10 @@
-import Util from "./Util";
-import Header from "./entity/Header";
-import Payload from "./entity/Payload";
-import Signature from "./Signature";
-import Action from "./entity/Action";
-import Identifiers from "./Identifiers";
-import ChannelType from "./entity/ChannelType";
+import Util from './Util';
+import Header from './entity/Header';
+import Payload from './entity/Payload';
+import Signature from './Signature';
+import Action from './entity/Action';
+import Identifiers from './Identifiers';
+import ChannelType from './entity/ChannelType';
 
 class VivoxToken {
   static readonly ADaySecond = 1000 * 60 * 60 * 24;
@@ -13,10 +13,15 @@ class VivoxToken {
   public domain: string;
   public adminAccount: string;
 
-  public constructor(issuer: string, key: string, domain: string, adminAccount: string) {
+  public constructor(
+    issuer: string,
+    key: string,
+    domain: string,
+    adminAccount: string
+  ) {
     this.issuer = issuer;
     this.key = key;
-    this.domain = "@" + domain;
+    this.domain = '@' + domain;
     this.adminAccount = adminAccount;
   }
 
@@ -31,10 +36,10 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Login,
       vxi: serialNumber,
-      f: "sip:" + Identifiers.userName(this.issuer, userID) + this.domain
+      f: 'sip:' + Identifiers.userName(this.issuer, userID) + this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public join(
     userID: string,
@@ -49,11 +54,14 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Join,
       vxi: serialNumber,
-      f: "sip:" + Identifiers.userName(this.issuer, userID) + this.domain,
-      t: "sip:" + Identifiers.channelName(channelType, this.issuer, channelID) + this.domain,
+      f: 'sip:' + Identifiers.userName(this.issuer, userID) + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(channelType, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public joinMuted(
     userID: string,
@@ -68,11 +76,14 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.JoinMuted,
       vxi: serialNumber,
-      f: "sip:" + Identifiers.userName(this.issuer, userID) + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      f: 'sip:' + Identifiers.userName(this.issuer, userID) + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public kick(
     fromUserID: string,
@@ -80,7 +91,7 @@ class VivoxToken {
     type: ChannelType,
     channelID: string,
     serialNumber: number = Date.now(),
-    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond),
+    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond)
   ): string {
     const header: Header = {};
     const payload: Payload = {
@@ -88,19 +99,22 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Kick,
       vxi: serialNumber,
-      sub: "sip:" + Identifiers.userName(this.issuer, toUserID) + this.domain,
-      f: "sip:" + Identifiers.userName(this.issuer, fromUserID) + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      sub: 'sip:' + Identifiers.userName(this.issuer, toUserID) + this.domain,
+      f: 'sip:' + Identifiers.userName(this.issuer, fromUserID) + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public kickByAdmin(
     toUserID: string,
     type: ChannelType,
     channelID: string,
     serialNumber: number = Date.now(),
-    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond),
+    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond)
   ): string {
     const header: Header = {};
     const payload: Payload = {
@@ -108,12 +122,15 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Kick,
       vxi: serialNumber,
-      sub: "sip:" + Identifiers.userName(this.issuer, toUserID) + this.domain,
-      f: "sip:" + this.adminAccount + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      sub: 'sip:' + Identifiers.userName(this.issuer, toUserID) + this.domain,
+      f: 'sip:' + this.adminAccount + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public kickUserFromServer(
     fromUserID: string,
@@ -127,12 +144,12 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Kick,
       vxi: serialNumber,
-      sub: "sip:" + Identifiers.userName(this.issuer, toUserID) + this.domain,
-      f: "sip:" + Identifiers.userName(this.issuer, fromUserID) + this.domain,
-      t: "sip:" + Identifiers.serverName(this.issuer) + this.domain,
+      sub: 'sip:' + Identifiers.userName(this.issuer, toUserID) + this.domain,
+      f: 'sip:' + Identifiers.userName(this.issuer, fromUserID) + this.domain,
+      t: 'sip:' + Identifiers.serverName(this.issuer) + this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public kickUserFromServerByAdmin(
     toUserID: string,
@@ -145,12 +162,12 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Kick,
       vxi: serialNumber,
-      sub: "sip:" + Identifiers.userName(this.issuer, toUserID) + this.domain,
-      f: "sip:" + this.adminAccount + this.domain,
-      t: "sip:" + Identifiers.serverName(this.issuer) + this.domain,
+      sub: 'sip:' + Identifiers.userName(this.issuer, toUserID) + this.domain,
+      f: 'sip:' + this.adminAccount + this.domain,
+      t: 'sip:' + Identifiers.serverName(this.issuer) + this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public kickAllUserFromChannel(
     userID: string,
@@ -165,11 +182,14 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Kick,
       vxi: serialNumber,
-      f: "sip:" + Identifiers.userName(this.issuer, userID) + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      f: 'sip:' + Identifiers.userName(this.issuer, userID) + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public kickAllUserFromChannelByAdmin(
     type: ChannelType,
@@ -183,11 +203,14 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Kick,
       vxi: serialNumber,
-      f: "sip:" + this.adminAccount + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      f: 'sip:' + this.adminAccount + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public mute(
     fromUserID: string,
@@ -195,7 +218,7 @@ class VivoxToken {
     type: ChannelType,
     channelID: string,
     serialNumber: number = Date.now(),
-    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond),
+    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond)
   ): string {
     const header: Header = {};
     const payload: Payload = {
@@ -203,19 +226,22 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Mute,
       vxi: serialNumber,
-      sub: "sip:" + Identifiers.userName(this.issuer, toUserID) + this.domain,
-      f: "sip:" + Identifiers.userName(this.issuer, fromUserID) + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      sub: 'sip:' + Identifiers.userName(this.issuer, toUserID) + this.domain,
+      f: 'sip:' + Identifiers.userName(this.issuer, fromUserID) + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public muteByAdmin(
     toUserID: string,
     type: ChannelType,
     channelID: string,
     serialNumber: number = Date.now(),
-    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond),
+    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond)
   ): string {
     const header: Header = {};
     const payload: Payload = {
@@ -223,19 +249,22 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Mute,
       vxi: serialNumber,
-      sub: "sip:" + Identifiers.userName(this.issuer, toUserID) + this.domain,
-      f: "sip:" + this.adminAccount + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      sub: 'sip:' + Identifiers.userName(this.issuer, toUserID) + this.domain,
+      f: 'sip:' + this.adminAccount + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public muteAllUserFromChannel(
     fromUserID: string,
     type: ChannelType,
     channelID: string,
     serialNumber: number = Date.now(),
-    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond),
+    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond)
   ): string {
     const header: Header = {};
     const payload: Payload = {
@@ -243,17 +272,20 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Mute,
       vxi: serialNumber,
-      f: "sip:" + Identifiers.userName(this.issuer, fromUserID) + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      f: 'sip:' + Identifiers.userName(this.issuer, fromUserID) + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public muteAllUserFromChannelByAdmin(
     type: ChannelType,
     channelID: string,
     serialNumber: number = Date.now(),
-    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond),
+    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond)
   ): string {
     const header: Header = {};
     const payload: Payload = {
@@ -261,11 +293,14 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Mute,
       vxi: serialNumber,
-      f: "sip:" + this.adminAccount + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      f: 'sip:' + this.adminAccount + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public muteAllUserFromChannelExcludeOneUser(
     fromUserID: string,
@@ -273,7 +308,7 @@ class VivoxToken {
     type: ChannelType,
     channelID: string,
     serialNumber: number = Date.now(),
-    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond),
+    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond)
   ): string {
     const header: Header = {};
     const payload: Payload = {
@@ -281,19 +316,22 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Mute,
       vxi: serialNumber,
-      sub: "sip:" + Identifiers.userName(this.issuer, toUserID) + this.domain,
-      f: "sip:" + Identifiers.userName(this.issuer, fromUserID) + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      sub: 'sip:' + Identifiers.userName(this.issuer, toUserID) + this.domain,
+      f: 'sip:' + Identifiers.userName(this.issuer, fromUserID) + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   public muteAllUserFromChannelExcludeOneUserByAdmin(
     toUserID: string,
     type: ChannelType,
     channelID: string,
     serialNumber: number = Date.now(),
-    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond),
+    expiredAt: Date = new Date(Date.now() + VivoxToken.ADaySecond)
   ): string {
     const header: Header = {};
     const payload: Payload = {
@@ -301,19 +339,22 @@ class VivoxToken {
       exp: Math.floor(expiredAt.getTime() / 1000),
       vxa: Action.Mute,
       vxi: serialNumber,
-      sub: "sip:" + Identifiers.userName(this.issuer, toUserID) + this.domain,
-      f: "sip:" + this.adminAccount + this.domain,
-      t: "sip:" + Identifiers.channelName(type, this.issuer, channelID) + this.domain,
+      sub: 'sip:' + Identifiers.userName(this.issuer, toUserID) + this.domain,
+      f: 'sip:' + this.adminAccount + this.domain,
+      t:
+        'sip:' +
+        Identifiers.channelName(type, this.issuer, channelID) +
+        this.domain,
     };
     return this.makeToken(header, payload);
-  };
+  }
 
   private makeToken(header: Header, payload: Payload): string {
     return [
       Util.base64URLEncode(JSON.stringify(header)),
       Util.base64URLEncode(JSON.stringify(payload)),
-      Signature.sign(header, payload, this.key)
-    ].join(".");
+      Signature.sign(header, payload, this.key),
+    ].join('.');
   }
 }
 

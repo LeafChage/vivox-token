@@ -1,4 +1,4 @@
-interface Payload {
+declare type Payload = {
     iss: string;
     exp: number;
     vxa: string;
@@ -6,5 +6,5 @@ interface Payload {
     sub?: string;
     f?: string;
     t?: string;
-}
+};
 export default Payload;

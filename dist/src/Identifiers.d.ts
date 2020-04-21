@@ -1,4 +1,4 @@
-import ChannelType from "./entity/ChannelType";
+import ChannelType from './entity/ChannelType';
 declare namespace Identifiers {
     const Prefix = "confctl";
     const channelName: (type: ChannelType, issuer: string, channelID: string) => string;

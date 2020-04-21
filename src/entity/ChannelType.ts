@@ -1,9 +1,9 @@
 export enum ChannelType {
-    EchoChannel = '-e-',
+  EchoChannel = '-e-',
 
-    NonPositionalChannels = '-g-',
+  NonPositionalChannels = '-g-',
 
-    PositionalChannels = '-d-',
+  PositionalChannels = '-d-',
 }
 
 export default ChannelType;

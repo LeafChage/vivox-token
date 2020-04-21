@@ -8,15 +8,20 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "tsc",
-    "prepublishOnly": "yarn run build"
+    "build": "yarn format; tsc",
+    "format": "prettier --write 'src/**/*.ts' ; prettier --write 'test/**/*.ts' ",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "@types/jest": "^25.1.2",
     "@types/node": "^12.12.20",
     "jest": "^25.1.0",
     "ts-jest": "^25.2.0",
+    "tslint": "^6.1.1",
     "typescript": "^3.7.3"
+  },
+  "devDependencies": {
+    "prettier": "2.0.4"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -27,7 +32,14 @@
       "^.+\\.ts$": "ts-jest"
     },
     "testMatch": [
-      "**/test/*.ts"
-    ]
+      "./**/*.ts"
+    ],
+    "rootDir": "test"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": true,
+    "tabWidth": 2,
+    "bracketSpacing": true
   }
 }

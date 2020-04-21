@@ -7,12 +7,16 @@ var Util;
         return base64EncodeAndReplaceCharacter(Buffer.from(str));
     };
     Util.hmacSHA256Base64Encode = (seed, key) => {
-        const hmac = Crypto.createHmac("sha256", key);
+        const hmac = Crypto.createHmac('sha256', key);
         hmac.update(seed);
         return base64EncodeAndReplaceCharacter(hmac.digest());
     };
     const base64EncodeAndReplaceCharacter = (buf) => {
-        return buf.toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/\=+$/, "");
+        return buf
+            .toString('base64')
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/\=+$/, '');
     };
 })(Util || (Util = {}));
 exports.default = Util;

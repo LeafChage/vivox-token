@@ -1,3 +1,2 @@
-interface Header {
-}
+declare type Header = {};
 export default Header;

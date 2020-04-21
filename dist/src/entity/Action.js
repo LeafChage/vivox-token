@@ -4,9 +4,9 @@ var Action;
 (function (Action) {
     // channel join
     Action["Join"] = "join";
-    // channel join listen-only	
+    // channel join listen-only
     Action["JoinMuted"] = "join_muted";
-    // kick user from a channel	
+    // kick user from a channel
     Action["Kick"] = "kick";
     // sign in
     Action["Login"] = "login";

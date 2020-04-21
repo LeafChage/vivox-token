@@ -7,6 +7,6 @@
     "skipLibCheck": true,
     "declaration": true,
     "pretty": true,
-    "outDir": "dist"
-  }
+    "outDir": "dist",
+  },
 }

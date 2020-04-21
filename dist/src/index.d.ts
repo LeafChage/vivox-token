@@ -1,4 +1,4 @@
-import ChannelType from "./entity/ChannelType";
+import ChannelType from './entity/ChannelType';
 declare class VivoxToken {
     static readonly ADaySecond: number;
     issuer: string;
