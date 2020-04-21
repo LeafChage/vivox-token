@@ -1,8 +1,14 @@
 {
   "name": "vivox-token",
   "version": "0.0.1",
+  "description": "create vivox token",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "license": "MIT",
-  "main": "dist/index.js",
+  "keywords": [
+    "vivox-token",
+    "Vivox"
+  ],
   "files": [
     "dist"
   ],
@@ -12,15 +18,13 @@
     "format": "prettier --write 'src/**/*.ts' ; prettier --write 'test/**/*.ts' ",
     "prepublishOnly": "yarn build"
   },
-  "dependencies": {
+  "devDependencies": {
     "@types/jest": "^25.1.2",
     "@types/node": "^12.12.20",
     "jest": "^25.1.0",
     "ts-jest": "^25.2.0",
     "tslint": "^6.1.1",
-    "typescript": "^3.7.3"
-  },
-  "devDependencies": {
+    "typescript": "^3.7.3",
     "prettier": "2.0.4"
   },
   "jest": {

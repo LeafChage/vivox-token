@@ -3,6 +3,7 @@
 # How to use
 ```ts
 // ts or js
+const {VivoxToken, ChannelType} = require('vivox-token');
 
 const issuer = "blindmelon-foobar-dev"; 
 const secretKey = "secret!";
