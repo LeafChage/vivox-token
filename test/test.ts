@@ -1,6 +1,6 @@
-import VivoxToken from '../src';
-import ChannelType from '../src/entity/ChannelType';
+import { VivoxToken, ChannelType } from '../src';
 
+console.log(VivoxToken);
 const vivoxToken = new VivoxToken(
   'blindmelon-foobar-dev',
   'secret!',
