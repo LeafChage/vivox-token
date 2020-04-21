@@ -9,6 +9,10 @@
     "vivox-token",
     "Vivox"
   ],
+   "repository": {
+    "type": "git",
+    "url": "https://github.com/LeafChage/vivox-token"
+  },
   "files": [
     "dist"
   ],
